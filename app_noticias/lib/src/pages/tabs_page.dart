@@ -1,3 +1,5 @@
+import 'package:app_noticias/src/pages/tab1_page.dart';
+import 'package:app_noticias/src/services/news_services.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -21,6 +23,8 @@ class _Navigation extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final navegacionModel = Provider.of<_NavegacionModel>(context);
+    
+
     return BottomNavigationBar(
       currentIndex: navegacionModel.paginaActual,
       onTap: (i)=> navegacionModel.paginaActual=i,
@@ -42,7 +46,7 @@ class _Paginas extends StatelessWidget {
      controller: navegacionModel.pagecontroller,
      physics: NeverScrollableScrollPhysics(),
       children: [
-        Container(color: Colors.red,),
+        Tab1Page(),
         Container(color: Colors.blue,)
       ],
     );
