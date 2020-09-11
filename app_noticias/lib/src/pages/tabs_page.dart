@@ -1,5 +1,5 @@
 import 'package:app_noticias/src/pages/tab1_page.dart';
-import 'package:app_noticias/src/services/news_services.dart';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
