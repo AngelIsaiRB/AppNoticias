@@ -1,15 +1,25 @@
 
+import 'package:app_noticias/src/models/category_model.dart';
 import 'package:app_noticias/src/models/news_models.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
 
   final String _url_news ="http://newsapi.org/v2";
    final String _apiKey ="fde98e19e1e64bbb8683b37064b4b7f4";
 
 class NewsService with ChangeNotifier{
-
+//business entertainment general health science sports technology
   List<Article> hedlines=[];
-
+  List<Category> categories=[
+    Category(FontAwesomeIcons.building,"business"),
+    Category(FontAwesomeIcons.gamepad,"entertainment"),
+    Category(FontAwesomeIcons.genderless,"general"),
+    Category(FontAwesomeIcons.headSideVirus,"health"),
+    Category(FontAwesomeIcons.vial,"science"),
+    Category(FontAwesomeIcons.futbol,"sports"),
+    Category(FontAwesomeIcons.memory,"technology"),    
+  ];
   
   NewsService(){
     this.gtTopHedlines();
