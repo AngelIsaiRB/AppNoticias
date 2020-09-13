@@ -11,6 +11,7 @@ import 'package:http/http.dart' as http;
 class NewsService with ChangeNotifier{
 //business entertainment general health science sports technology
   List<Article> hedlines=[];
+  String _selectedCategory = "business";
   List<Category> categories=[
     Category(FontAwesomeIcons.building,"business"),
     Category(FontAwesomeIcons.gamepad,"entertainment"),
@@ -20,11 +21,25 @@ class NewsService with ChangeNotifier{
     Category(FontAwesomeIcons.futbol,"sports"),
     Category(FontAwesomeIcons.memory,"technology"),    
   ];
+
+  Map<String, List<Article>> categoryArticles={};
   
   NewsService(){
     this.gtTopHedlines();
+    categories.forEach((element) { 
+      this.categoryArticles[element.name]= new List();
+
+    });
   }
 
+  get selectedCategory => this._selectedCategory;
+
+  set selectedCategory (String valor){
+    this._selectedCategory=valor;
+    this.getarticlesByCategory(valor);
+    notifyListeners();
+
+  }
 
   gtTopHedlines()async {
       final url="$_url_news/top-headlines?apiKey=$_apiKey&country=Mx";
@@ -35,4 +50,17 @@ class NewsService with ChangeNotifier{
 
   }
 
+  getarticlesByCategory(String category)async {
+
+    if (this.categoryArticles[category].length>0){
+      return this.categoryArticles[category];
+    }
+
+    final url="$_url_news/top-headlines?apiKey=$_apiKey&country=Mx&category=$category";
+    final respuesta = await http.get(url);
+    final newsResponse =  noticiaFromJson(respuesta.body);
+    this.categoryArticles[category].addAll(newsResponse.articles);
+    notifyListeners();
 }
+  }
+  
