@@ -35,12 +35,14 @@ class NewsService with ChangeNotifier{
   get selectedCategory => this._selectedCategory;
 
   set selectedCategory (String valor){
-    print(valor);
+    //print(valor);
     this._selectedCategory=valor;
     this.getarticlesByCategory(valor);
     notifyListeners();
 
   }
+
+  List<Article> get getAriculosCategoriaSeleccionada => this.categoryArticles[this.selectedCategory];
 
   gtTopHedlines()async {
       final url="$_url_news/top-headlines?apiKey=$_apiKey&country=Mx";
