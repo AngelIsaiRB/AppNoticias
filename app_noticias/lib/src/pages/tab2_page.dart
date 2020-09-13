@@ -56,13 +56,14 @@ class _Categorybutton extends StatelessWidget {
   final Category category;
   
   const _Categorybutton({this.category});
- 
 
+  
   @override
   Widget build(BuildContext context) {
+     final newsService = Provider.of<NewsService>(context, listen: false); 
     return GestureDetector(
       onTap: (){
-        final newsService = Provider.of<NewsService>(context, listen: false); 
+       
         newsService.selectedCategory=category.name;
       },
       child: Container(
@@ -72,7 +73,10 @@ class _Categorybutton extends StatelessWidget {
           shape: BoxShape.circle,
           color: Colors.white
         ),
-        child: Icon(category.icon, color: Colors.black54,),     
+        child: Icon(category.icon, 
+        color: ( newsService.selectedCategory==category.name)?Colors.red:Colors.black54,
+        
+        ),     
       ),
     );
   }

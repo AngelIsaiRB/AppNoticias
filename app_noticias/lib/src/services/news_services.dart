@@ -35,6 +35,7 @@ class NewsService with ChangeNotifier{
   get selectedCategory => this._selectedCategory;
 
   set selectedCategory (String valor){
+    print(valor);
     this._selectedCategory=valor;
     this.getarticlesByCategory(valor);
     notifyListeners();
